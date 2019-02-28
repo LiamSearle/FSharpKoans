@@ -150,7 +150,7 @@ module ``03: Putting the Function into Functional Programming`` =
     let ``17 Two names can be bound to the same value`` () =
         let f x = x + 2
         let y = f
-        y 20 |> should equal ___
+        y 20 |> should equal 22
 
     [<Ignore("Later")>]
     let ``21 Getting closure`` () =
@@ -179,8 +179,8 @@ module ``03: Putting the Function into Functional Programming`` =
         let a = 25
         let f () = a + 10
         let a = 99
-        a |> should equal __
-        f () |> should equal __
+        a |> should equal 99
+        f () |> should equal 35
 
     [<Test>]
     let ``19 Nesting functions`` () =
