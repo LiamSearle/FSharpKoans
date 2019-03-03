@@ -140,14 +140,14 @@ module ``03: Putting the Function into Functional Programming`` =
             let triple x = x * 3
             let addOne x = x + 1
             addOne (triple x)
-        hailstone 5 |> should equal __
+        hailstone 5 |> should equal 16
 
-    [<Test>]
+    [<Test>]//not done
     let ``20 Functions have types`` () =
         let a x y = x + "cabbage" + y
         let b r = 50.0 / r
-        a |> should be ofType<FILL_ME_IN>
-        b |> should be ofType<FILL_ME_IN>
+        a |> should be ofType<int>
+        b |> should be ofType<float>
 
 
     [<Test>]
@@ -165,11 +165,11 @@ module ``03: Putting the Function into Functional Programming`` =
         with the feature of higher-order functions :).
     *)
         let somefunc x y = x + y x
-        let square v = v * v
-        somefunc 3 square |> should equal __
-        somefunc 3 ((*) 7) |> should equal __
-        somefunc 10 ((+) 8) |> should equal __
-        somefunc 5 (fun z -> z + 22) |> should equal __
+        let square v = (v * v)
+        somefunc 3 square |> should equal 15
+        somefunc 3 ((*) 7) |> should equal 1
+        somefunc 10 ((+) 8) |> should equal 1
+        somefunc 5 (fun z -> z + 22) |> should equal 1
 
    (*
        Did you know that operators like +, -, =, >, and so on, are actually
