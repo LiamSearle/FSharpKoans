@@ -90,21 +90,10 @@ module ``11: Exploring types, options, and results`` =
     [<Test>]
     let ``06 Using a Result to explain why things went wrong`` () =
         let f n m =
-            match n<0.0, m=0.0 with
-<<<<<<< HEAD
-            | true, _ -> Error NegativeNumberSupplied
-            | _, true -> __
-            | _ ->
-                // 'sqrt' is the square-root function
-                __ (sqrt n / m)
-        f -6.0 2.5 |> shouldEqual __
-        f 144.0 2.0 |> shouldEqual (Ok 6.0)
-        f 7.3 0.0 |> shouldEqual (Error DivisionByZero)
-=======
+           match n<0.0, m=0.0 with
             | true, false -> Error NegativeNumberSupplied
             | false, true -> Error DivisionByZero
             | false, false -> (Ok ((sqrt n) / m))
         f -6.0 2.5 |> should equal (Error NegativeNumberSupplied)
         f 144.0 2.0 |> should equal (Ok 6.0)
         f 7.3 0.0 |> should equal (Error DivisionByZero)
->>>>>>> fd4e2d6668aed76c4961fc254ed72d0a145419bf
