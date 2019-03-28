@@ -49,12 +49,12 @@ module ``13: String manipulation`` =
 
     [<Test>]
     let ``07 String formatting: %s format specifier`` () =
-        let result = sprintf "Practice makes %s" "perfect"
+        let result = sprintf "Practice makes %s." "perfect"
         result |> should equal "Practice makes perfect."
 
     [<Test>]
     let ``08 String formatting: %d format specifier`` () =
-        let result = sprintf "%i planets, Sir, endlessy circle, Sir" 9
+        let result = sprintf "%d planets, Sir, endlessly circle, Sir" 9
         result |> should equal "9 planets, Sir, endlessly circle, Sir"
 
     [<Test>]
@@ -72,9 +72,9 @@ module ``13: String manipulation`` =
     // The default precision is about 6, as near as I can tell.
     [<Test>]
     let ``11 String formatting: %f format specifier`` () =
-        let result = sprintf "Multiply by %f, then triple" 2.26
-        let condensed = sprintf "Multiply by %e, then triple" 2.26
-        let rounded = sprintf "Multiply by %g, then triple" 2.26
+        let result = sprintf "Multiply by %8.6f, then triple" 2.26
+        let condensed = sprintf "Multiply by %4.2f, then triple" 2.26
+        let rounded = sprintf "Multiply by %3.1f, then triple" 2.26
         result |> should equal "Multiply by 2.260000, then triple"
         condensed |> should equal "Multiply by 2.26, then triple"
         rounded |> should equal "Multiply by 2.3, then triple"
@@ -89,12 +89,12 @@ module ``13: String manipulation`` =
    // double-up a % to get a % in.
     [<Test>]
     let ``13 String formatting: Putting a '%' sign in`` () =
-        let result = sprintf "I scored %f%% on the test" 94.43
+        let result = sprintf "I scored %5.2f%% on the test" 94.43
         result |> should equal "I scored 94.43% on the test"
 
     [<Test>]
     let ``14 String formatting: Multiple format specifiers`` () =
-        let result = sprintf "%i out of %i is %f, or %s %i percent." 3 5 0.6 "in other words" 60
+        let result = sprintf "%i out of %i is %3.1f, or (%s) %i percent." 3 5 0.6 "in other words" 60
         result |> should equal "3 out of 5 is 0.6, or (in other words) 60 percent."
 
    // But that's not all! See the full set of formatting capabilities here:
@@ -105,9 +105,9 @@ module ``13: String manipulation`` =
     [<Test>]
     let ``15 You can use the "usual" C# string methods from F#`` () =
         let s = "  Dr Phil, PhD, MD, MC, Medicine Man  "
-        let ``first index of 'P'`` = s.IndexOf 'p'
-        let ``last index of 'P'`` = s.LastIndexOf 'p'
-        let ``lowercase version`` = s.ToLower
+        let ``first index of 'P'`` = s.IndexOf 'P'
+        let ``last index of 'P'`` = s.LastIndexOf 'P'
+        let ``lowercase version`` = s.ToLower()
         let ``without surrounding space`` = s.Trim()
         ``first index of 'P'`` |> should equal 5
         ``last index of 'P'`` |> should equal 11
