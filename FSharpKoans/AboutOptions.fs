@@ -1,5 +1,6 @@
 ﻿namespace FSharpKoans
 open NUnit.Framework
+open FsUnitTyped
 
 (*
 In F#, we tend to use options instead of exceptions for error-handling.
@@ -89,7 +90,7 @@ module ``11: Exploring types, options, and results`` =
     [<Test>]
     let ``06 Using a Result to explain why things went wrong`` () =
         let f n m =
-            match n<0.0, m=0.0 with
+           match n<0.0, m=0.0 with
             | true, false -> Error NegativeNumberSupplied
             | false, true -> Error DivisionByZero
             | false, false -> (Ok ((sqrt n) / m))
