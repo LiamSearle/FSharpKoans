@@ -209,7 +209,7 @@ or something else), it's likely that you'll be able to use a fold.
     let ``14 A fold which sums a list`` () =
         let rec fold initialState xs =
             match xs with 
-            |[] -> 0
+            |[] -> initialState
             |head::tail -> initialState + fold (head) tail  // write a function to do what's described above
         fold 0 [1; 2; 3; 4] |> should equal 10
         fold 100 [2;4;6;8] |> should equal 120
