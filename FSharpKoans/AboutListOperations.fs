@@ -1,5 +1,6 @@
 ﻿namespace FSharpKoans
 open NUnit.Framework
+open System.Collections.Concurrent
 
 (*
 Suggestion: before you do the next few files, read through and
@@ -259,8 +260,13 @@ or something else), it's likely that you'll be able to use a fold.
     // List.exists
     [<Test>]
     let ``18 exists: finding whether any matching item exists`` () =
-        let exists (f : 'a -> bool) (xs : 'a list) : bool =
-            __ // Does this: https://msdn.microsoft.com/en-us/library/ee370309.aspx
+        let rec exists (f : 'a -> bool) (xs : 'a list) : bool =
+            match xs with
+            |[]->false
+            |head::tail ->
+                match f head with
+                |true -> true
+                |_-> exists f tail // Does this: https://msdn.microsoft.com/en-us/library/ee370309.aspx
         exists ((=) 4) [7;6;5;4;5] |> should equal true
         exists (fun x -> String.length x < 4) ["true"; "false"] |> should equal false
         exists (fun _ -> true) [] |> should equal false
@@ -268,8 +274,15 @@ or something else), it's likely that you'll be able to use a fold.
     // List.partition
     [<Test>]
     let ``19 partition: splitting a list based on a criterion`` () =
-        let partition (f : 'a -> bool) (xs : 'a list) : ('a list) * ('a list) =
-            __ // Does this: https://msdn.microsoft.com/en-us/library/ee353782.aspx
+        let rec partition (f : 'a -> bool) (xs : 'a list) : ('a list) * ('a list) =
+             match xs with
+             |[] -> [],[]
+             |head::tail -> match f head with
+                                |true -> [xs.Item 0] @ [head],[]  //add it to the first list
+                                |_ -> [xs.Item 1] @ [],[head] //add it to the other list
+                            partition f tail              
+                                
+    // Does this: https://msdn.microsoft.com/en-us/library/ee353782.aspx
         let a, b = partition (fun x -> x%2=0) [1;2;3;4;5;6;7;8;9;10]
         a |> should equal [2;4;6;8;10]
         b |> should equal [1;3;5;7;9]
