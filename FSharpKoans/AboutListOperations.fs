@@ -217,7 +217,7 @@ or something else), it's likely that you'll be able to use a fold.
     [<Test>]
     let ``15 A fold which multiplies a list`` () =
         let rec fold initialState xs =
-             match xs with 
+            match xs with 
             |[] -> initialState
             |head::tail -> initialState * fold (head) tail // write a function to multiply the elements of a list
         fold 1 [99] |> should equal 99
@@ -231,8 +231,16 @@ or something else), it's likely that you'll be able to use a fold.
 
     [<Test>]
     let ``16 Folding, the hard way`` () =
-        let fold (f : 'a -> 'b -> 'a) (initialState : 'a) (xs : 'b list) : 'a =
-            __  // write a function to do a fold.
+        let rec fold (f : 'a -> 'b -> 'a) (initialState : 'a) (xs : 'b list) : 'a =
+            match xs with
+            | [] -> initialState
+            | _ -> 
+            let f = OptimizedClosures.FSharpFunc<_,_,_>.Adapt(f)
+            let rec loop s xs = 
+                    match xs with
+                    | [] -> s
+                    | h::t -> loop (f.Invoke(s,h)) t
+            loop initialState xs  // write a function to do a fold.
         fold (+) 0 [1;2;3;4] |> should equal 10
         fold (*) 2 [1;2;3;4] |> should equal 48
         fold (fun state item -> sprintf "%s %s" state item) "items:" ["dog"; "cat"; "bat"; "rat"]
