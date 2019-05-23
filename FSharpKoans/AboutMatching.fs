@@ -36,10 +36,10 @@ module ``04: Match expressions`` =
         | 100 -> ()
         | 19 -> ()
         | y ->
-            y |> should equal __
-            x |> should equal __
-        y |> should equal __
-        x |> should equal __
+            y |> should equal 213
+            x |> should equal 213
+        y |> should equal 19
+        x |> should equal 213
 
     [<Test>]
     let ``04 Match order in match expressions`` () =
@@ -57,15 +57,17 @@ module ``04: Match expressions`` =
             | 19 -> "Smite"
             | y -> "Trite"
             | 213 -> "Light"
-        x |> should equal __
-        y |> should equal __
-        z |> should equal __
-        a |> should equal __
+        x |> should equal 213
+        y |> should equal 19
+        z |> should equal "Bite"
+        a |> should equal "Trite"
 
     [<Test>]
     let ``05 Using a mapping function`` () =
         let mapper = function
-            | _ -> __ // write the cases for this function!
+            | 3 -> "Joey"
+            |8 -> "Bingo"
+            |11 |15 -> "Kelvin" // write the cases for this function!
         mapper 3 |> should equal "Joey"
         mapper 8 |> should equal "Bingo"
         mapper 11 |> should equal "Kelvin"
