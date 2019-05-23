@@ -14,15 +14,15 @@ module ``04: Match expressions`` =
     [<Test>]
     let ``01 Basic match expression`` () =
         match 8000 with
-        | FILL_ME__IN -> "Insufficient power-level"
+        | 8000 -> "Insufficient power-level"
         ()
 
     [<Test>]
     let ``02 Match expressions are expressions, not statements`` () =
         let result =
             match 9001 with
-            | FILL_ME__IN -> // <-- use an identifier pattern here!
-                match __ + 1000 with
+            | y -> // <-- use an identifier pattern here!
+                match y + 1000 with
                 | 10001 -> "Hah! It's a palindromic number!"
                 | x -> "Some number."
             | x -> "I should have matched the other expression."
